@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',  # Token authentication for DRF
     'rest_framework',  # Django REST Framework for API support
     'drf_spectacular',  # For OpenAPI schema generation
-    'user'
+    'user',
+    'recipe',  # Custom app for recipe functionality
 ]
 
 MIDDLEWARE = [
