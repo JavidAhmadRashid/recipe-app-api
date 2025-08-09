@@ -24,11 +24,10 @@ class TagSerializer(serializers.ModelSerializer):
 class RecipeSerializer(serializers.ModelSerializer):
     """Serializer for Recipe model."""
     tags = TagSerializer(many = True, required = False)
-    ingredients = IngredientSerializer(many = True, required = False)
-
+    
     class Meta:
         model = Recipe
-        fields = ['id', 'title', 'time_minutes', 'price', 'link', 'tags', 'ingredients']
+        fields = ['id', 'title', 'time_minutes', 'price', 'link', 'tags']
         read_only_fields = ['id']
     
     def _get_or_create_tags(self, tags, recipe):
@@ -55,7 +54,7 @@ class RecipeSerializer(serializers.ModelSerializer):
         if tags is not None:
             instance.tags.clear()
             self._get_or_create_tags(tags, instance)
-        
+
         for attr, value in validated_data.items():
             setattr(instance, attr, value)
         

@@ -10,13 +10,13 @@ from rest_framework.test import APIClient
 
 from recipe.serializers import TagSerializer, IngredientSerializer
 
-from core.models import Tag, Ingredient, Recipe
+from core.models import Ingredient
 
 INGREDIENT_URL = reverse('recipe:ingredient-list')
 
 def detail_url(ingredient_id):
     """Create and return a tag detail url"""
-    return reverse('recipe:tag-detail', args=[ingredient_id])
+    return reverse('recipe:ingredient-detail', args=[ingredient_id])
 
 def create_user(email = 'test@example.com', password = 'testpass123'):
     """Create and return a new user."""
@@ -71,12 +71,11 @@ class PrivateIngredientsApiTests(TestCase):
 
     def test_update_ingredient(self):
         """Test updating ingredient's model."""
-        ingredient = Ingredient.objects.create(user=self.user, name='after dinner')
+        ingredient = Ingredient.objects.create(user = self.user, name = 'Salt')
 
-        payload = {'name': 'Vanila'}
-        url = detail_url(ingredient.id)
+        payload = {'name':'Pepper'}
+        url = detail_url(ingredient_id=ingredient.id)
         res = self.client.patch(url, payload)
-
         self.assertEqual(res.status_code, status.HTTP_200_OK)
         ingredient.refresh_from_db()
         self.assertEqual(ingredient.name, payload['name'])
