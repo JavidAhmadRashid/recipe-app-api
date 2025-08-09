@@ -136,3 +136,7 @@ AUTH_USER_MODEL = 'core.User'  # Custom user model
 REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }
+
+SPECTACULER_SETTING = {
+    'COMPONENT_SPLIT_RQUEST':True,
+}
